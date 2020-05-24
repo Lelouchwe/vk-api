@@ -43,20 +43,14 @@ let parse = async () => {
     //     i += 200
     // } while (i<=count)
     // await fs.writeFile('alldialogs.txt', allDialogs, (error, data) => console.log(data))
-    // let readArr
-    // let reading = await fs.readFile('alldialogs.txt', 'utf-8', (error, data) => {readArr = data.split(','); console.log(readArr)})
     let reading = await fs.readFileSync('alldialogs.txt', 'utf-8').split(',')
-    // console.log(await readArr)
-    // console.log( reading[0])
-    for(let i=7; i<9; i++){
-        // console.log(reading[i])
-        let filterMassage = []
+
+    for(let i=8; i<11; i++){
+        let filterMassage = [], tempArr = [], numbArr = []
         let dialog = await getHistory(access_token,reading[i])
         let question = ''
         let answere = ''
-        let tempArr = []
         let predOut = 0
-        let numbArr = []
         let n = 0
         let nPred = 0
         let bodyString = ''
@@ -81,9 +75,14 @@ let parse = async () => {
                 question = ''
             }
         }
-        console.log(numbArr)
-        for(let [index, item] of numbArr.entries()){
-            allDialogs.push(`"${numbArr[index]}","${numbArr[index+1]}"\n`) 
+        numbArr.forEach(item => filterMassage.push(item.replace(/\n/g, ' ').slice(0,-2)))
+        if(filterMassage.length % 2 !== 0 )
+            filterMassage.pop()
+        filterMassage = filterMassage.map(item => item.replace(/"/g, "'") )
+        console.log(filterMassage)
+        for(let i = 0; i<filterMassage.length; i+=2){
+            // allDialogs.push(`"${filterMassage[i]}" , "${filterMassage[i+1]}"\n`) 
+            await fs.appendFileSync('datasetvyatsu.csv', `"${filterMassage[i]}","${filterMassage[i+1]}"\n`)
         }
         // allDialogs.push(`"${question}","${answere}"\n`)
         // allDialogs.push(`${question}`+','+`${answere}`)
@@ -93,7 +92,7 @@ let parse = async () => {
         // console.log(dialog);
         
     }
-    await fs.writeFileSync('datasetvyatsu.txt', allDialogs)
+    // await fs.writeFileSync('datasetvyatsu.txt', allDialogs)
     // let allMassages = []
     // for (let item of list) {
     //     allMassages.push(await getHistory(item))
