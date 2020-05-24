@@ -61,38 +61,6 @@ let parse = async () => {
         let nPred = 0
         let bodyString = ''
         for(let [index, item] of dialog.reverse().entries()){
-            let outCounter = 0
-            
-            /////////////////////////////////////////
-            // if(item.out === 0){
-            //     outCounter++
-            //     tempArr.push(item.body)
-            //     console.log('tempArr1',tempArr)
-            // }
-            // if(outCounter = 2 && item.out !== 1){
-            //     i++
-            //     tempArr = []
-            // } 
-            // if(outCounter = 2 && item.out === 1){
-            //     tempArr.push(item.body)
-            //     console.log('tempArr2',tempArr)
-            //     filterMassage.push(...tempArr)
-            // }
-
-            ////////////////////////////////////////
-            // if (index === 1 && item.out === 0){
-            //     tempArr = []
-            //     break
-            // } else if(index === 0) {
-            //     tempArr.push(item.body)
-            // } else if (){}
-            // console.log(index, item)
-
-            ///////////////////////////////////////
-            // let predOut = 0
-            // let numbArr = []
-            // let n = 0
-            // let nPred = 0
             if(item.out === 0){
                 question+= item.body+', '
                 if(predOut !== item.out){
