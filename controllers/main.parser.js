@@ -47,7 +47,7 @@ let parse = async () => {
     // await fs.writeFile('alldialogs.txt', allDialogs, (error, data) => console.log(data))
     let reading = await fs.readFileSync('alldialogs.txt', 'utf-8').split(',')
 
-    for(let i=170; i<180; i++){
+    for(let i=500; i<520; i++){
         let filterMassage = [], tempArr = [], numbArr = []
         let dialog = await getHistory(access_token,reading[i],200)
         let question = ''
